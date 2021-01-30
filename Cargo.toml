@@ -1,0 +1,9 @@
+[package]
+name = "barger"
+version = "0.1.0"
+authors = ["Hrafn Orri Hrafnkelsson <HrafnOrri@BitCrow.net>"]
+edition = "2018"
+
+[dependencies]
+actix-web = "3.3.2"
+diesel = { version = "1.4.5", features = ["postgres"] }
