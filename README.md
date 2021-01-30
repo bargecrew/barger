@@ -1,6 +1,10 @@
 # Barger
 
+
+## Dev Setup
+
+Install dev tools:
+
 ~~~bash
-cargo install cargo-watch
-cargo install diesel_cli --no-default-features --features postgres
+./bin/dev_setup.sh
 ~~~
