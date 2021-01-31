@@ -13,7 +13,10 @@ use std::env;
 
 #[get("/api/status")]
 async fn status() -> HttpResponse {
-    HttpResponse::Ok().body("OK")
+    let version = env::var("CARGO_PKG_VERSION").expect("CARGO_PKG_VERSION must be set");
+    HttpResponse::Ok().json(models::responses::GetStatusResponse{
+        version: version,
+    })
 }
 
 #[actix_web::main]
