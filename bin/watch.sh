@@ -2,7 +2,7 @@
 
 set -euxo pipefail
 
-./scripts/database.sh
+./bin/database.sh
 
 cargo watch -x 'run --bin barger'
 
