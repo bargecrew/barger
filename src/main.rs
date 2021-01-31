@@ -1,6 +1,10 @@
+extern crate chrono;
+#[macro_use]
 extern crate diesel;
 extern crate dotenv;
+extern crate serde;
 
+mod models;
 mod schema;
 
 use actix_web::{get, App, HttpServer, HttpResponse};
