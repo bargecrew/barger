@@ -7,14 +7,17 @@ extern crate serde;
 mod models;
 mod schema;
 
-use actix_web::{get, App, HttpServer, HttpResponse};
 use dotenv::dotenv;
 use std::env;
 
-#[get("/api/status")]
-async fn status() -> HttpResponse {
+async fn validator(req: actix_web::dev::ServiceRequest, _credentials: actix_web_httpauth::extractors::bearer::BearerAuth) -> Result<actix_web::dev::ServiceRequest, actix_web::Error> {
+    Ok(req)
+}
+
+#[actix_web::get("/api/status")]
+async fn status() -> actix_web::HttpResponse {
     let version = env::var("CARGO_PKG_VERSION").expect("CARGO_PKG_VERSION must be set");
-    HttpResponse::Ok().json(models::responses::GetStatusResponse{
+    actix_web::HttpResponse::Ok().json(models::responses::GetStatusResponse{
         version: version,
     })
 }
@@ -26,8 +29,11 @@ async fn main() -> std::io::Result<()> {
     let host = env::var("HOST").expect("HOST must be set");
     let port = env::var("PORT").expect("PORT must be set");
 
-    HttpServer::new(|| {
-        App::new()
+    actix_web::HttpServer::new(|| {
+        actix_web::App::new()
+            .wrap(actix_web::middleware::Logger::default())
+            .wrap(actix_web_httpauth::middleware::HttpAuthentication::bearer(validator))
+            .wrap(actix_cors::Cors::default())
             .service(status)
     })
     .bind(format!("{host}:{port}", host = host, port = port))?
