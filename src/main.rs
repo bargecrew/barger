@@ -25,7 +25,7 @@ async fn authorize(req: actix_web::dev::ServiceRequest, _credentials: actix_web_
 async fn status() -> actix_web::HttpResponse {
     let version = env::var("CARGO_PKG_VERSION").expect("CARGO_PKG_VERSION must be set");
     actix_web::HttpResponse::Ok().json(models::responses::GetStatusResponse{
-        version: version,
+        version,
     })
 }
 
@@ -33,7 +33,7 @@ async fn status() -> actix_web::HttpResponse {
 async fn auth() -> actix_web::HttpResponse {
     let version = env::var("CARGO_PKG_VERSION").expect("CARGO_PKG_VERSION must be set");
     actix_web::HttpResponse::Ok().json(models::responses::GetStatusResponse{
-        version: version,
+        version,
     })
 }
 
