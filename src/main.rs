@@ -4,6 +4,7 @@ extern crate diesel;
 extern crate dotenv;
 extern crate serde;
 
+mod handlers;
 mod models;
 mod schema;
 
@@ -19,14 +20,6 @@ async fn authorize(req: actix_web::dev::ServiceRequest, _credentials: actix_web_
             return Err(actix_web::error::ErrorNotFound("Not Found"));
         }
     }
-}
-
-#[actix_web::get("/api/status")]
-async fn status() -> actix_web::HttpResponse {
-    let version = env::var("CARGO_PKG_VERSION").expect("CARGO_PKG_VERSION must be set");
-    actix_web::HttpResponse::Ok().json(models::responses::GetStatusResponse{
-        version,
-    })
 }
 
 #[actix_web::get("/api/auth")]
@@ -48,7 +41,11 @@ async fn main() -> std::io::Result<()> {
         actix_web::App::new()
             .wrap(actix_web::middleware::Logger::default())
             .wrap(actix_cors::Cors::default())
-            .service(status)
+            // health
+            .service(handlers::health::ready)
+            .service(handlers::health::live)
+            // status
+            .service(handlers::status::get)
             .service(
                 actix_web::web::scope("")
                     .wrap(actix_web_httpauth::middleware::HttpAuthentication::bearer(authorize))
