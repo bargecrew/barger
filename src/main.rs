@@ -11,7 +11,7 @@ mod schema;
 use dotenv::dotenv;
 use std::env;
 
-async fn authorize(req: actix_web::dev::ServiceRequest, _credentials: actix_web_httpauth::extractors::bearer::BearerAuth) -> Result<actix_web::dev::ServiceRequest, actix_web::Error> {
+async fn authorize(req: actix_web::dev::ServiceRequest, _credentials: actix_web_httpauth::extractors::basic::BasicAuth) -> Result<actix_web::dev::ServiceRequest, actix_web::Error> {
     match req.path() {
         "/api/auth" => {
             Ok(req)
@@ -48,7 +48,7 @@ async fn main() -> std::io::Result<()> {
             .service(handlers::status::get)
             .service(
                 actix_web::web::scope("")
-                    .wrap(actix_web_httpauth::middleware::HttpAuthentication::bearer(authorize))
+                    .wrap(actix_web_httpauth::middleware::HttpAuthentication::basic(authorize))
                     .service(auth)
             )
     })
