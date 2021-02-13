@@ -1,8 +1,6 @@
 CREATE TABLE permissions (
   id SERIAL NOT NULL PRIMARY KEY,
-  username VARCHAR NOT NULL,
-  password VARCHAR NOT NULL,
-  email VARCHAR NOT NULL,
+  value VARCHAR NOT NULL,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
@@ -14,7 +12,7 @@ EXECUTE PROCEDURE trigger_set_updated_at();
 
 CREATE TABLE group_permissions (
   id SERIAL NOT NULL PRIMARY KEY,
-  group_id SERIAL references group(id),
+  group_id SERIAL references groups(id),
   permission_id SERIAL references permissions(id),
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
