@@ -6,7 +6,7 @@ pub async fn authorize(req: actix_web::dev::ServiceRequest, _credentials: actix_
                     Ok(req)
                 },
                 _ => {
-                    return Err(actix_web::error::ErrorNotFound("Not Found"));
+                    return Err(actix_web::error::ErrorBadRequest("Bad Request"));
                 }
             }
         },

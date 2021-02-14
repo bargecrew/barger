@@ -28,6 +28,7 @@ pub struct Permission {
 #[derive(Queryable, Debug, Serialize, Deserialize)]
 pub struct User {
     pub id: i32,
+    pub admin: bool,
     pub username: String,
     pub password: String,
     pub email: String,
