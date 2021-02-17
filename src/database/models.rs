@@ -35,3 +35,11 @@ pub struct User {
     pub created_at: NaiveDateTime,
     pub updated_at: NaiveDateTime,
 }
+
+#[derive(Queryable, Debug, Serialize, Deserialize)]
+pub struct Token {
+    pub id: i32,
+    pub token: String,
+    pub created_at: NaiveDateTime,
+    pub updated_at: NaiveDateTime,
+}
