@@ -1,4 +1,4 @@
-use serde::{Serialize};
+use serde::Serialize;
 
 // - /api/status
 #[derive(Serialize)]
@@ -12,9 +12,3 @@ pub struct GetHealthReadyResponse {}
 
 #[derive(Serialize)]
 pub struct GetHealthLiveResponse {}
-
-// - /api/users
-#[derive(Serialize)]
-pub struct GetUsersResponse {
-    pub users: Vec<String>,
-}
