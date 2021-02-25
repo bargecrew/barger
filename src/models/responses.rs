@@ -12,3 +12,7 @@ pub struct GetHealthReadyResponse {}
 
 #[derive(Serialize)]
 pub struct GetHealthLiveResponse {}
+
+// - /api/clusters
+#[derive(Serialize)]
+pub struct GetClustersResponse {}

@@ -32,8 +32,10 @@ async fn main() -> std::io::Result<()> {
             // authorized
             .service(
                 actix_web::web::scope("")
-                    .wrap(actix_web_httpauth::middleware::HttpAuthentication::basic(authorization::authorize))
-                    .service(handlers::users::get)
+                    .wrap(actix_web_httpauth::middleware::HttpAuthentication::bearer(
+                        authorization::authorize,
+                    ))
+                    .service(handlers::clusters::get),
             )
     })
     .bind(format!("{host}:{port}", host = host, port = port))?

@@ -1,5 +1,4 @@
 pub mod models;
-pub mod tokens;
 
 use diesel::pg::PgConnection;
 use diesel::prelude::*;
