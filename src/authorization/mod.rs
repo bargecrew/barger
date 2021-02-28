@@ -51,7 +51,7 @@ fn is_valid(claims: &claims::Claims, path: &str, method: &str) -> Result<bool, a
             return Ok(true);
         }
     }
-    return Ok(false);
+    Ok(false)
 }
 
 #[cfg(test)]

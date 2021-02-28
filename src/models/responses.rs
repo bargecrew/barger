@@ -1,3 +1,4 @@
+use crate::models::common;
 use serde::Serialize;
 
 // - /api/status
@@ -15,4 +16,6 @@ pub struct GetHealthLiveResponse {}
 
 // - /api/clusters
 #[derive(Serialize)]
-pub struct GetClustersResponse {}
+pub struct GetClustersResponse {
+    pub clusters: Vec<common::Cluster>,
+}
