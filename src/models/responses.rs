@@ -19,3 +19,8 @@ pub struct GetHealthLiveResponse {}
 pub struct GetClustersResponse {
     pub clusters: Vec<common::Cluster>,
 }
+
+#[derive(Serialize)]
+pub struct PostClustersResponse {
+    pub cluster: common::Cluster,
+}
