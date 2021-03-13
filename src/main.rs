@@ -5,6 +5,7 @@ extern crate dotenv;
 extern crate serde;
 
 mod authorization;
+mod config;
 mod database;
 mod handlers;
 mod models;
@@ -24,19 +25,7 @@ async fn main() -> std::io::Result<()> {
         actix_web::App::new()
             .wrap(actix_web::middleware::Logger::default())
             .wrap(actix_cors::Cors::default())
-            // health
-            .service(handlers::health::ready)
-            .service(handlers::health::live)
-            // status
-            .service(handlers::status::get)
-            // authorized
-            .service(
-                actix_web::web::scope("")
-                    .wrap(actix_web_httpauth::middleware::HttpAuthentication::bearer(
-                        authorization::authorize,
-                    ))
-                    .service(handlers::clusters::get),
-            )
+            .configure(config::config)
     })
     .bind(format!("{host}:{port}", host = host, port = port))?
     .run()

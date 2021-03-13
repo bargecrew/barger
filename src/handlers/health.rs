@@ -12,8 +12,7 @@ async fn live() -> actix_web::HttpResponse {
 
 #[cfg(test)]
 mod test_ready {
-    use crate::authorization;
-    use crate::handlers;
+    use crate::config;
     use actix_web::dev::Service;
     use actix_web::{http, test, Error};
 
@@ -22,19 +21,7 @@ mod test_ready {
         let app = actix_web::App::new()
             .wrap(actix_web::middleware::Logger::default())
             .wrap(actix_cors::Cors::default())
-            // health
-            .service(handlers::health::ready)
-            .service(handlers::health::live)
-            // status
-            .service(handlers::status::get)
-            // authorized
-            .service(
-                actix_web::web::scope("")
-                    .wrap(actix_web_httpauth::middleware::HttpAuthentication::bearer(
-                        authorization::authorize,
-                    ))
-                    .service(handlers::clusters::get),
-            );
+            .configure(config::config);
         let mut app = test::init_service(app).await;
 
         let req = test::TestRequest::get()
@@ -50,8 +37,7 @@ mod test_ready {
 
 #[cfg(test)]
 mod test_live {
-    use crate::authorization;
-    use crate::handlers;
+    use crate::config;
     use actix_web::dev::Service;
     use actix_web::{http, test, Error};
 
@@ -60,19 +46,7 @@ mod test_live {
         let app = actix_web::App::new()
             .wrap(actix_web::middleware::Logger::default())
             .wrap(actix_cors::Cors::default())
-            // health
-            .service(handlers::health::ready)
-            .service(handlers::health::live)
-            // status
-            .service(handlers::status::get)
-            // authorized
-            .service(
-                actix_web::web::scope("")
-                    .wrap(actix_web_httpauth::middleware::HttpAuthentication::bearer(
-                        authorization::authorize,
-                    ))
-                    .service(handlers::clusters::get),
-            );
+            .configure(config::config);
         let mut app = test::init_service(app).await;
 
         let req = test::TestRequest::get()
