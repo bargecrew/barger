@@ -18,6 +18,17 @@ table! {
 }
 
 table! {
+    configurations (id) {
+        id -> Int4,
+        key -> Varchar,
+        value -> Varchar,
+        service_id -> Nullable<Int4>,
+        created_at -> Timestamptz,
+        updated_at -> Timestamptz,
+    }
+}
+
+table! {
     groups (id) {
         id -> Int4,
         name -> Varchar,
@@ -39,6 +50,17 @@ table! {
 }
 
 table! {
+    secrets (id) {
+        id -> Int4,
+        key -> Varchar,
+        value -> Varchar,
+        service_id -> Nullable<Int4>,
+        created_at -> Timestamptz,
+        updated_at -> Timestamptz,
+    }
+}
+
+table! {
     services (id) {
         id -> Int4,
         name -> Varchar,
@@ -49,15 +71,19 @@ table! {
     }
 }
 
+joinable!(configurations -> services (service_id));
 joinable!(resources -> change_sets (change_set_id));
 joinable!(resources -> services (service_id));
+joinable!(secrets -> services (service_id));
 joinable!(services -> clusters (cluster_id));
 joinable!(services -> groups (group_id));
 
 allow_tables_to_appear_in_same_query!(
     change_sets,
     clusters,
+    configurations,
     groups,
     resources,
+    secrets,
     services,
 );
