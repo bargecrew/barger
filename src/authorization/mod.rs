@@ -88,7 +88,6 @@ mod tests_get_claims {
         for i in 0..result.claims.len() {
             assert_eq!(claims.claims[i], result.claims[i]);
         }
-        assert_eq!(false, true);
     }
 
     #[test]

@@ -1,6 +1,6 @@
 {
     "sub": "admin",
-    "exp": "2461453200",
+    "exp": "2461453200000",
     "claims": [
         "/api/clusters:GET"
     ]
