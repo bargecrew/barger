@@ -62,10 +62,6 @@ mod tests_get_claims {
     use std::time::{SystemTime, UNIX_EPOCH};
 
     fn new_token(claims: &claims::Claims) -> String {
-        println!(
-            "{}",
-            env::var("JWT_PRIVATE_KEY").expect("JWT_PRIVATE_KEY must be set")
-        );
         encode(
             &Header::new(Algorithm::RS256),
             &claims,
@@ -92,6 +88,7 @@ mod tests_get_claims {
         for i in 0..result.claims.len() {
             assert_eq!(claims.claims[i], result.claims[i]);
         }
+        assert_eq!(false, true);
     }
 
     #[test]
