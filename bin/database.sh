@@ -13,6 +13,9 @@ docker run -d -p 5432:5432 \
 
 sleep 5
 
-diesel migration run
+(
+    cd server;
+    diesel migration run;
+)
 
 exit 0
