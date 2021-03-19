@@ -1,0 +1,10 @@
+[package]
+name = "client"
+version = "0.1.0"
+authors = ["Hrafn Orri Hrafnkelsson <HrafnOrri@BitCrow.net>"]
+edition = "2018"
+
+[dependencies]
+clap = "2.33.0"
+http = "0.2.3"
+jsonwebtoken = "7.2.0"
