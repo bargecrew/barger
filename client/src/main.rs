@@ -31,11 +31,11 @@ fn main() {
         )
         .subcommands(vec![
             SubCommand::with_name("create")
-                .about("Get resource")
+                .about("Create resource")
                 .subcommand(SubCommand::with_name("cluster").about("Create clusters"))
                 .subcommand(SubCommand::with_name("clusters").about("Create clusters")),
             SubCommand::with_name("delete")
-                .about("Get resource")
+                .about("Delete resource")
                 .subcommand(SubCommand::with_name("cluster").about("Delete clusters"))
                 .subcommand(SubCommand::with_name("clusters").about("Delete clusters")),
             SubCommand::with_name("get")
