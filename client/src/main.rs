@@ -1,14 +1,11 @@
 extern crate clap;
-extern crate http;
+extern crate reqwest;
+
+mod request;
 
 use clap::{App, Arg, SubCommand};
-// use http::Request;
-// use std::fs;
 
 fn main() {
-    // let filename = "~/.barger/token";
-    // let token = fs::read_to_string(filename)
-    //     .expect(&format!("Could not read token from file {}", filename));
     let matches = App::new("barger")
         .version("0.1.0")
         .author("Hrafn Orri Hrafnkelsson <HrafnOrri@BitCrow.net>")
