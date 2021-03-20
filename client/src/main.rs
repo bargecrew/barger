@@ -1,6 +1,9 @@
 extern crate clap;
 extern crate reqwest;
+extern crate serde_derive;
+extern crate toml;
 
+mod config;
 mod request;
 
 use clap::{App, Arg, SubCommand};
@@ -19,11 +22,11 @@ fn main() {
                 .takes_value(true),
         )
         .arg(
-            Arg::with_name("token")
-                .short("t")
-                .long("token")
+            Arg::with_name("profile")
+                .short("p")
+                .long("profile")
                 .value_name("STRING")
-                .help("Sets JWT token")
+                .help("Sets the profile")
                 .takes_value(true),
         )
         .subcommands(vec![
@@ -42,8 +45,13 @@ fn main() {
         ])
         .get_matches();
 
+    let _profile = config::get_profile(
+        matches.value_of("config").unwrap_or("~/.barger/config"),
+        matches.value_of("profile").unwrap_or("default"),
+    );
+
     match matches.subcommand() {
-        ("get", Some(sub_m)) => {}
+        ("get", Some(_sub_m)) => {}
         _ => {}
     }
 }
