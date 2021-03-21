@@ -52,8 +52,46 @@ fn main() {
         matches.value_of("profile").unwrap_or("default"),
     ) {
         Ok(_profile) => match matches.subcommand() {
-            ("get", Some(_sub_m)) => {}
-            _ => {}
+            ("create", Some(sub_m)) => match sub_m.subcommand_name() {
+                Some("cluster") => {
+                    println!("create cluster");
+                }
+                Some("clusters") => {
+                    println!("create clusters");
+                }
+                _ => {
+                    println!("error: unknown command");
+                    process::exit(1);
+                }
+            },
+            ("delete", Some(sub_m)) => match sub_m.subcommand_name() {
+                Some("cluster") => {
+                    println!("delete cluster");
+                }
+                Some("clusters") => {
+                    println!("delete clusters");
+                }
+                _ => {
+                    println!("error: unknown command");
+                    process::exit(1);
+                }
+            },
+            ("get", Some(sub_m)) => match sub_m.subcommand_name() {
+                Some("cluster") => {
+                    println!("get cluster");
+                }
+                Some("clusters") => {
+                    println!("get clusters");
+                }
+                _ => {
+                    println!("error: unknown command");
+                    process::exit(1);
+                }
+            },
+            _ => {
+                println!("error: unknown command");
+                process::exit(1);
+            }
         },
         Err(err) => {
             println!("error: {}", err);
