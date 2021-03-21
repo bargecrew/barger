@@ -1,3 +1,4 @@
+use dirs;
 use serde_derive::Deserialize;
 use std::fs;
 use toml;
@@ -20,8 +21,16 @@ struct FileProfile {
     pub token: String,
 }
 
+fn normalize_path(path: &str) -> String {
+    if path.contains("~") {
+        return path.replace("~", dirs::home_dir().unwrap().to_str().as_ref().unwrap());
+    }
+    return path.to_string();
+}
+
 pub fn get_profile(filename: &str, profile: &str) -> Result<Profile, String> {
-    match fs::read_to_string(&filename) {
+    let normalized_filename = normalize_path(&filename);
+    match fs::read_to_string(&normalized_filename) {
         Ok(content) => match toml::from_str::<FileConfig>(&content) {
             Ok(config) => {
                 for i in 0..config.profile.len() {
@@ -32,14 +41,16 @@ pub fn get_profile(filename: &str, profile: &str) -> Result<Profile, String> {
                         });
                     }
                 }
-                return Err(format!("profile '{}' not found", &filename));
+                return Err(format!("profile '{}' not found", &normalized_filename));
             }
-            Err(_) => {
-                return Err(format!("could not parse file {}", &filename));
+            Err(err) => {
+                eprintln!("{}", err);
+                return Err(format!("could not parse file {}", &normalized_filename));
             }
         },
-        Err(_) => {
-            return Err(format!("could not read file {}", &filename));
+        Err(err) => {
+            eprintln!("{}", err);
+            return Err(format!("could not read file {}", &normalized_filename));
         }
     }
 }

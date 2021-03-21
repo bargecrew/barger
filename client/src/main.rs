@@ -1,4 +1,5 @@
 extern crate clap;
+extern crate dirs;
 extern crate reqwest;
 extern crate serde_derive;
 extern crate toml;
@@ -7,6 +8,7 @@ mod config;
 mod request;
 
 use clap::{App, Arg, SubCommand};
+use std::process;
 
 fn main() {
     let matches = App::new("barger")
@@ -45,13 +47,17 @@ fn main() {
         ])
         .get_matches();
 
-    let _profile = config::get_profile(
+    match config::get_profile(
         matches.value_of("config").unwrap_or("~/.barger/config"),
         matches.value_of("profile").unwrap_or("default"),
-    );
-
-    match matches.subcommand() {
-        ("get", Some(_sub_m)) => {}
-        _ => {}
+    ) {
+        Ok(_profile) => match matches.subcommand() {
+            ("get", Some(_sub_m)) => {}
+            _ => {}
+        },
+        Err(err) => {
+            println!("error: {}", err);
+            process::exit(1);
+        }
     }
 }
