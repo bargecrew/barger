@@ -1,6 +1,12 @@
 [workspace]
-
 members = [
     "client",
     "server",
 ]
+
+[workspace.metadata.raze]
+default_gen_buildrs = true
+experimental_api = true
+genmode = "Remote"
+render_package_aliases = true
+workspace_path = "//bazel/rust/raze"

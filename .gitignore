@@ -1,2 +1,19 @@
+# bazel
+*~
+.*.swp
+/.classpath
+/.factorypath
+/.idea/
+/.ijwb/
+/.project
+/.settings
+/bazel.iml
+/bazel-*
+/output/
+/production
+/.sass-cache
+user.bazelrc
+
+# rust
 /target
 /tmp
