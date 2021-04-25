@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package barger;
+
+import "google/protobuf/empty.proto";
+
+service Barger {
+  rpc GetStatus (google.protobuf.Empty) returns (GetStatusResponse);
+  rpc CreateCluster (CreateClusterRequest) returns (CreateClusterResponse);
+}
+
+message GetStatusResponse {
+  string version = 1;
+}
+
+message CreateClusterRequest {
+  message Cluster {
+    string name = 1;
+  }
+  Cluster cluster = 1;
+}
+
+message CreateClusterResponse {
+  message Cluster {
+    uint32 id = 1;
+    string name = 2;
+    int64 created_at = 3;
+    int64 updated_at = 4;
+  }
+  Cluster cluster = 1;
+}
