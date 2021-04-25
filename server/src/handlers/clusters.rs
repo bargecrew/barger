@@ -9,7 +9,7 @@ async fn get() -> actix_web::HttpResponse {
             actix_web::HttpResponse::Ok().json(models::responses::GetClustersResponse {
                 clusters: clusters
                     .into_iter()
-                    .map(|x| models::common::new_cluster(x))
+                    .map(models::common::new_cluster)
                     .collect(),
             })
         }

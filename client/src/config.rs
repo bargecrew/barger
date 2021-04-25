@@ -20,10 +20,10 @@ struct FileProfile {
 }
 
 fn normalize_path(path: &str) -> String {
-    if path.contains("~") {
+    if path.contains('~') {
         return path.replace("~", dirs::home_dir().unwrap().to_str().as_ref().unwrap());
     }
-    return path.to_string();
+    path.to_string()
 }
 
 pub fn get_profile(filename: &str, profile: &str) -> Result<Profile, String> {

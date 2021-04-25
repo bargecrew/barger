@@ -1,6 +1,5 @@
 use crate::authorization;
 use crate::handlers;
-use actix_web;
 
 pub fn config(cfg: &mut actix_web::web::ServiceConfig) {
     cfg
