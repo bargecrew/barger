@@ -1,7 +1,5 @@
-use dirs;
 use serde_derive::Deserialize;
 use std::fs;
-use toml;
 
 #[derive(Deserialize)]
 pub struct Profile {
