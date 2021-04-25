@@ -39,3 +39,8 @@ jobs:
           command: test
       - name: docker push
         uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: bragecrew/barger:latest
+          secrets: |
+            GIT_AUTH_TOKEN=${{ secrets.DOCKER_TOKEN }}
