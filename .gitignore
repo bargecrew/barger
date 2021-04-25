@@ -1,3 +1,13 @@
-# rust
+# IDEs
+
+# IntelliJ
+.idea
+
+# VSCode
+.vscode
+
+# Languages
+
+## Rust
 /target
 /tmp

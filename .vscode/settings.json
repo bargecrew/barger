@@ -1,7 +1,0 @@
-{
-    "files.exclude": {
-        "target": true,
-        "tmp": true
-    },
-    "editor.formatOnSave": true
-}

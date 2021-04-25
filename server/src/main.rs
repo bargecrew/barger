@@ -21,6 +21,8 @@ async fn main() -> std::io::Result<()> {
     let host = env::var("HOST").expect("HOST must be set");
     let port = env::var("PORT").expect("PORT must be set");
 
+    println!("Listening on {}:{}", host, port);
+
     actix_web::HttpServer::new(|| {
         actix_web::App::new()
             .wrap(actix_web::middleware::Logger::default())
