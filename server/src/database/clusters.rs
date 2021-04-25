@@ -13,7 +13,7 @@ pub fn get_clusters(connection: &PgConnection) -> Result<Vec<Cluster>, actix_web
 
 pub fn create_cluster(
     connection: &PgConnection,
-    cluster_name: &String,
+    cluster_name: &str,
 ) -> Result<Cluster, actix_web::Error> {
     use crate::schema::clusters::dsl::*;
 
